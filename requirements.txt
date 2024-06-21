@@ -1,1 +1,1 @@
-pip3 uninstall python-telegram-bot==20.7
+pip3 install python-telegram-bot==20.7
