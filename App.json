@@ -1,0 +1,24 @@
+{
+  "name": "Telegram Bot",
+  "description": "A simple Telegram bot deployed on Heroku",
+  "repository": "https://github.com/username/reponame",
+  "logo": "https://link.to/logo.png",
+  "keywords": ["python", "telegram", "bot"],
+  "env": {
+    "BOT_TOKEN": {
+      "description": "The API token for the Telegram bot",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "standard-1X"
+    }
+  }
+}
