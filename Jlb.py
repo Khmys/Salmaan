@@ -1,6 +1,8 @@
 import logging
+import os
 from telegram import Bot, Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+
 
 # Kuweka log level kwenye INFO
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -8,11 +10,13 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
+TOKEN = os.environ.get('TOKEN', None)
+
 
 
 async def start(update, context):
     """Send a message when the command /start is issued."""
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm a Telegram bot. Type /echo to see an echo of your message.")
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="Habari #Marafiki tuko hapa kujifunza na kufanya majalibio ya Code au Msimbo")
 
 async def echo(update, context):
     """Echo the user message."""
@@ -31,7 +35,7 @@ def main() -> None:
 	application = Application.builder().token("6555046105:AAExFhj03molfJGTheCyAumCvz0o2JlfTIk").build()
 	
 	start_handler = CommandHandler('start', start)
-	echo_handler = MessageHandler(filters.ALL, echo)
+	echo_handler = MessageHandler(filters.ALL & (filters.ChatType.PRIVATE), echo)
 	application.add_handler(start_handler)
 	application.add_handler(echo_handler)
 	
